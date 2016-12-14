@@ -353,6 +353,7 @@ public class TelaLogin extends javax.swing.JFrame {
 
     /**
      * @param args the command line arguments
+     * -Djava.library.path="C:\opcv\opencv\build\java\x86" 
      */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -382,10 +383,7 @@ public class TelaLogin extends javax.swing.JFrame {
         //</editor-fold>
  System.loadLibrary(Core.NATIVE_LIBRARY_NAME); // load native library of opencv
 
-/**
- * 
- * -DJAVA.Library.path = "C:\opcv\opencv\build\java\x86"
- */
+
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
