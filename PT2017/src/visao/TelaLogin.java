@@ -16,6 +16,7 @@ import java.awt.Point;
 import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
+import org.opencv.core.Core;
 /**
  *
  * @author deciodecarvalho
