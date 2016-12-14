@@ -179,7 +179,6 @@ public class TelaAgendaServico extends javax.swing.JFrame {
         lblIdClienteAgenda = new javax.swing.JLabel();
         lbltidPet = new javax.swing.JLabel();
         lblIdPetAgenda = new javax.swing.JLabel();
-        jdpAgendamento = new org.jdesktop.swingx.JXDatePicker();
         lblDataAgendamento = new javax.swing.JLabel();
         btnConfirmar = new javax.swing.JButton();
         cbxHoraAgendamento = new javax.swing.JComboBox();
@@ -192,6 +191,7 @@ public class TelaAgendaServico extends javax.swing.JFrame {
         lblDisponibilidade = new javax.swing.JLabel();
         lbHoraAgendamentoOcupacao = new javax.swing.JLabel();
         jbpDisponibilidade = new javax.swing.JProgressBar();
+        jdpAgendamento = new org.jdesktop.swingx.JXDatePicker();
         lblTituloAgendaPet = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -284,23 +284,6 @@ public class TelaAgendaServico extends javax.swing.JFrame {
         lblIdPetAgenda.setForeground(new java.awt.Color(102, 102, 102));
         lblIdPetAgenda.setText(" ");
         lblIdPetAgenda.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 2, true));
-
-        jdpAgendamento.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jdpAgendamento.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jdpAgendamentoActionPerformed(evt);
-            }
-        });
-        jdpAgendamento.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
-            public void propertyChange(java.beans.PropertyChangeEvent evt) {
-                jdpAgendamentoPropertyChange(evt);
-            }
-        });
-        jdpAgendamento.addVetoableChangeListener(new java.beans.VetoableChangeListener() {
-            public void vetoableChange(java.beans.PropertyChangeEvent evt)throws java.beans.PropertyVetoException {
-                jdpAgendamentoVetoableChange(evt);
-            }
-        });
 
         lblDataAgendamento.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
         lblDataAgendamento.setForeground(new java.awt.Color(102, 102, 102));
@@ -409,8 +392,8 @@ public class TelaAgendaServico extends javax.swing.JFrame {
                         .addGroup(jpnlMesAtualLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jpnlMesAtualLayout.createSequentialGroup()
                                 .addComponent(lblDataAgendamento)
-                                .addGap(18, 18, 18)
-                                .addComponent(jdpAgendamento, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jdpAgendamento, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(lbHoraAgendamento)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -472,10 +455,10 @@ public class TelaAgendaServico extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jpnlMesAtualLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblDataAgendamento)
-                    .addComponent(jdpAgendamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cbxHoraAgendamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbHoraAgendamento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(lbHoraAgendamento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jdpAgendamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
                 .addGroup(jpnlMesAtualLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpnlMesAtualLayout.createSequentialGroup()
@@ -493,7 +476,7 @@ public class TelaAgendaServico extends javax.swing.JFrame {
                         .addContainerGap(32, Short.MAX_VALUE))))
         );
 
-        jpnlMesAtualLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {cbxHoraAgendamento, jbpDisponibilidade, jdpAgendamento});
+        jpnlMesAtualLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {cbxHoraAgendamento, jbpDisponibilidade});
 
         jpnlMesAtualLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {cbxServico, tctIdServico});
 

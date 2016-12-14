@@ -188,8 +188,8 @@
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Group type="102" alignment="0" attributes="0">
                                               <Component id="lblDataAgendamento" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                                              <Component id="jdpAgendamento" min="-2" pref="167" max="-2" attributes="0"/>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Component id="jdpAgendamento" min="-2" pref="181" max="-2" attributes="0"/>
                                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                               <Component id="lbHoraAgendamento" min="-2" max="-2" attributes="0"/>
                                               <EmptySpace max="-2" attributes="0"/>
@@ -268,10 +268,10 @@
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="lblDataAgendamento" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jdpAgendamento" linkSize="4" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="btnConfirmar" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
                                   <Component id="cbxHoraAgendamento" linkSize="4" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="lbHoraAgendamento" alignment="3" max="32767" attributes="0"/>
+                                  <Component id="jdpAgendamento" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace pref="11" max="32767" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
@@ -499,21 +499,6 @@
                         </Property>
                       </Properties>
                     </Component>
-                    <Component class="org.jdesktop.swingx.JXDatePicker" name="jdpAgendamento">
-                      <Properties>
-                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                          <Font name="Arial" size="14" style="1"/>
-                        </Property>
-                      </Properties>
-                      <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jdpAgendamentoActionPerformed"/>
-                        <EventHandler event="propertyChange" listener="java.beans.PropertyChangeListener" parameters="java.beans.PropertyChangeEvent" handler="jdpAgendamentoPropertyChange"/>
-                        <EventHandler event="vetoableChange" listener="java.beans.VetoableChangeListener" parameters="java.beans.PropertyChangeEvent" handler="jdpAgendamentoVetoableChange"/>
-                      </Events>
-                      <AuxValues>
-                        <AuxValue name="JavaCodeGenerator_SerializeTo" type="java.lang.String" value="TelaAgendamentoClientePet_jXDatePicker1"/>
-                      </AuxValues>
-                    </Component>
                     <Component class="javax.swing.JLabel" name="lblDataAgendamento">
                       <Properties>
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -666,6 +651,8 @@
                         </Property>
                         <Property name="maximum" type="int" value="8"/>
                       </Properties>
+                    </Component>
+                    <Component class="org.jdesktop.swingx.JXDatePicker" name="jdpAgendamento">
                     </Component>
                   </SubComponents>
                 </Container>
