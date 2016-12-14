@@ -16,7 +16,6 @@ import java.awt.Point;
 import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
-import org.opencv.core.Core;
 /**
  *
  * @author deciodecarvalho
@@ -380,11 +379,11 @@ public class TelaLogin extends javax.swing.JFrame {
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
-System.loadLibrary(Core.NATIVE_LIBRARY_NAME); // load native library of opencv
+ System.loadLibrary(Core.NATIVE_LIBRARY_NAME); // load native library of opencv
 
 /**
  * 
- * -DJAVA.Library.path = "C:\opencv\build\java\x86"
+ * -DJAVA.Library.path = "C:\opcv\opencv\build\java\x86"
  */
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
