@@ -36,6 +36,7 @@ public class TelaJavaCam extends javax.swing.JInternalFrame {
         cmdTakePicture.setEnabled(false);
         cmdStop.setEnabled(false);
         cmdClean.setEnabled(false);
+        btnSourceCam.setText("Escolha a Cam");
 
     }
 
@@ -333,8 +334,8 @@ public class TelaJavaCam extends javax.swing.JInternalFrame {
                         .addGap(18, 18, 18)
                         .addComponent(lblCam1, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(105, 105, 105)
-                        .addComponent(btnSourceCam)))
+                        .addGap(70, 70, 70)
+                        .addComponent(btnSourceCam, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -376,19 +377,18 @@ public class TelaJavaCam extends javax.swing.JInternalFrame {
 
         //t.start();
         tCam1.start();
-        
+
         //Delay para verifica se a cam abriu e habilitar o botão de tirar foto
         try {
             Thread.sleep(400);
             if (!camPet.isOpened()) {
-            cmdTakePicture.setEnabled(false);
-        } else {
-            cmdTakePicture.setEnabled(true);
-        }
+                cmdTakePicture.setEnabled(false);
+            } else {
+                cmdTakePicture.setEnabled(true);
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        
 
         cmdSair.setEnabled(false); //sair button
         cmdStart.setEnabled(false);  //start button
@@ -411,11 +411,18 @@ public class TelaJavaCam extends javax.swing.JInternalFrame {
         cmdSair.setEnabled(true); //sair button
         cmdTakePicture.setEnabled(false);
         btnSourceCam.setEnabled(true); //botão cam
-        
+
         lblFoto.setIcon(null);
         lblFotoTake.setIcon(null);
         lblPetFotoCaminho.setText("");
-        lblCam1.setIcon(null);
+
+        try {
+            Thread.sleep(400);
+            lblCam1.setIcon(null);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         this.repaint();
     }//GEN-LAST:event_cmdStopActionPerformed
 
@@ -480,8 +487,10 @@ public class TelaJavaCam extends javax.swing.JInternalFrame {
 
         if (selected) {
             SOURCE_CAM = 0;
+            btnSourceCam.setText("Webcam 0");
         } else {
             SOURCE_CAM = 1;
+            btnSourceCam.setText("Webcam 1");
         }
 
     }//GEN-LAST:event_btnSourceCamActionPerformed
