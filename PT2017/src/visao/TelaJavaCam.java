@@ -348,7 +348,7 @@ public class TelaJavaCam extends javax.swing.JInternalFrame {
         //webSource = new VideoCapture(1);
         cmdClean.setEnabled(true);
 
-        camPet = new VideoCapture(0);
+        camPet = new VideoCapture(1);
 
         //myThread = new DaemonThread();
         //Thread t = new Thread(myThread);
