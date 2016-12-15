@@ -26,6 +26,7 @@ import org.opencv.highgui.VideoCapture;
 public class TelaJavaCam extends javax.swing.JInternalFrame {
 
     private Object jFileChooser1;
+    private static int SOURCE_CAM = 3;
 
     /**
      * Creates new form TelaJavaCam
@@ -102,16 +103,13 @@ public class TelaJavaCam extends javax.swing.JInternalFrame {
                         try {
                             camPet.retrieve(frame);
                             Highgui.imencode(".bmp", frame, mem);
-                            
+
                             //putTexto();
-                            
                             Image im = ImageIO.read(new ByteArrayInputStream(mem.toArray()));
 
                             BufferedImage buff = (BufferedImage) im;
-                            
-                            Graphics gCam1 = lblCam1.getGraphics();
 
-                            
+                            Graphics gCam1 = lblCam1.getGraphics();
 
                             if (gCam1.drawImage(buff, 0, 0, width, height, 0, 0, buff.getWidth(), buff.getHeight(), null)) {
                                 if (runnable == false) {
@@ -127,26 +125,25 @@ public class TelaJavaCam extends javax.swing.JInternalFrame {
             }
         }
 
-        
         public void putTexto() {
             /*   
-            try {
+             try {
              
              //System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
-                Core.putText(
-                    frame, 
-                    "Tutorialspoint.com",
-                    new Point(frame.rows() / 2,frame.cols() / 2), 
-                    20, 
-                    new Scalar(255));
-                //Highgui.imwrite(im, frame);
+             Core.putText(
+             frame, 
+             "Tutorialspoint.com",
+             new Point(frame.rows() / 2,frame.cols() / 2), 
+             20, 
+             new Scalar(255));
+             //Highgui.imwrite(im, frame);
                 
-            } catch (Exception e) {
-                System.out.println("Error: " + e.getMessage());
+             } catch (Exception e) {
+             System.out.println("Error: " + e.getMessage());
 
-            }
+             }
 
-            import org.opencv.core.Core;
+             import org.opencv.core.Core;
              import org.opencv.core.Mat;
 
              import org.opencv.highgui.Highgui;
@@ -170,10 +167,10 @@ public class TelaJavaCam extends javax.swing.JInternalFrame {
              }
              }
             
-            */
-            
+             */
+
         }//final putTexto
-        
+
     }
 
     /**
@@ -197,6 +194,7 @@ public class TelaJavaCam extends javax.swing.JInternalFrame {
         cmdClean = new javax.swing.JButton();
         lblCam1 = new javax.swing.JLabel();
         lblPetFotoCaminho = new javax.swing.JLabel();
+        btnSourceCam = new javax.swing.JToggleButton();
 
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 25), 2));
         jPanel1.setPreferredSize(new java.awt.Dimension(600, 400));
@@ -312,6 +310,13 @@ public class TelaJavaCam extends javax.swing.JInternalFrame {
 
         lblPetFotoCaminho.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
 
+        btnSourceCam.setText("Source");
+        btnSourceCam.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSourceCamActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -323,8 +328,13 @@ public class TelaJavaCam extends javax.swing.JInternalFrame {
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(lblCam1, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(lblCam1, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(105, 105, 105)
+                        .addComponent(btnSourceCam)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -332,7 +342,10 @@ public class TelaJavaCam extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblCam1, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblCam1, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnSourceCam))
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 423, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -348,7 +361,7 @@ public class TelaJavaCam extends javax.swing.JInternalFrame {
         //webSource = new VideoCapture(1);
         cmdClean.setEnabled(true);
 
-        camPet = new VideoCapture(1);
+        camPet = new VideoCapture(SOURCE_CAM);
 
         //myThread = new DaemonThread();
         //Thread t = new Thread(myThread);
@@ -363,10 +376,25 @@ public class TelaJavaCam extends javax.swing.JInternalFrame {
 
         //t.start();
         tCam1.start();
-        cmdTakePicture.setEnabled(true);
+        
+        //Delay para verifica se a cam abriu e habilitar o botão de tirar foto
+        try {
+            Thread.sleep(400);
+            if (!camPet.isOpened()) {
+            cmdTakePicture.setEnabled(false);
+        } else {
+            cmdTakePicture.setEnabled(true);
+        }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+
         cmdSair.setEnabled(false); //sair button
         cmdStart.setEnabled(false);  //start button
         cmdStop.setEnabled(true);  // stop button
+        btnSourceCam.setEnabled(false); //botão cam
+
 
     }//GEN-LAST:event_cmdStartActionPerformed
 
@@ -382,6 +410,12 @@ public class TelaJavaCam extends javax.swing.JInternalFrame {
         camPet.release();
         cmdSair.setEnabled(true); //sair button
         cmdTakePicture.setEnabled(false);
+        btnSourceCam.setEnabled(true); //botão cam
+        
+        lblFoto.setIcon(null);
+        lblFotoTake.setIcon(null);
+        lblPetFotoCaminho.setText("");
+        lblCam1.setIcon(null);
         this.repaint();
     }//GEN-LAST:event_cmdStopActionPerformed
 
@@ -434,13 +468,27 @@ public class TelaJavaCam extends javax.swing.JInternalFrame {
         // Limpar fotos
         lblFoto.setIcon(null);
         lblFotoTake.setIcon(null);
+        lblPetFotoCaminho.setText("");
         this.repaint();
         cmdClean.setEnabled(false);
 
     }//GEN-LAST:event_cmdCleanActionPerformed
 
+    private void btnSourceCamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSourceCamActionPerformed
+        // TODO add your handling code here:
+        boolean selected = btnSourceCam.isSelected();
+
+        if (selected) {
+            SOURCE_CAM = 0;
+        } else {
+            SOURCE_CAM = 1;
+        }
+
+    }//GEN-LAST:event_btnSourceCamActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JToggleButton btnSourceCam;
     private javax.swing.JButton cmdClean;
     private javax.swing.JButton cmdSair;
     private javax.swing.JButton cmdStart;

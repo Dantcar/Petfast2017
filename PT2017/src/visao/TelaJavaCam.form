@@ -31,8 +31,16 @@
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="lblCam1" min="-2" pref="255" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="lblCam1" min="-2" pref="255" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="105" max="-2" attributes="0"/>
+                      <Component id="btnSourceCam" min="-2" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
               <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
@@ -42,7 +50,11 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="lblCam1" min="-2" pref="186" max="-2" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <Component id="lblCam1" min="-2" pref="186" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="btnSourceCam" min="-2" max="-2" attributes="0"/>
+                  </Group>
                   <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
                   <Component id="jPanel1" min="-2" pref="423" max="-2" attributes="0"/>
               </Group>
@@ -226,6 +238,14 @@
           <Font name="Arial" size="12" style="1"/>
         </Property>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JToggleButton" name="btnSourceCam">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Source"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSourceCamActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>
