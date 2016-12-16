@@ -5,6 +5,7 @@
  */
 package visao;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -36,6 +37,8 @@ public class TelaJavaCam extends javax.swing.JInternalFrame {
         cmdTakePicture.setEnabled(false);
         cmdStop.setEnabled(false);
         cmdClean.setEnabled(false);
+        cmdStart.setEnabled(false);
+        btnSourceCam.setBackground(Color.green);
         btnSourceCam.setText("Escolha a Cam");
 
     }
@@ -196,6 +199,7 @@ public class TelaJavaCam extends javax.swing.JInternalFrame {
         lblCam1 = new javax.swing.JLabel();
         lblPetFotoCaminho = new javax.swing.JLabel();
         btnSourceCam = new javax.swing.JToggleButton();
+        jLabel1 = new javax.swing.JLabel();
 
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 25), 2));
         jPanel1.setPreferredSize(new java.awt.Dimension(600, 400));
@@ -312,11 +316,18 @@ public class TelaJavaCam extends javax.swing.JInternalFrame {
         lblPetFotoCaminho.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
 
         btnSourceCam.setText("Source");
+        btnSourceCam.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnSourceCamMouseClicked(evt);
+            }
+        });
         btnSourceCam.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSourceCamActionPerformed(evt);
             }
         });
+
+        jLabel1.setText("jLabel1");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -335,7 +346,11 @@ public class TelaJavaCam extends javax.swing.JInternalFrame {
                         .addComponent(lblCam1, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(70, 70, 70)
-                        .addComponent(btnSourceCam, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnSourceCam, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(50, 50, 50)
+                                .addComponent(jLabel1)))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -346,7 +361,9 @@ public class TelaJavaCam extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(lblCam1, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(btnSourceCam))
+                        .addComponent(btnSourceCam)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel1))
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 423, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -363,7 +380,23 @@ public class TelaJavaCam extends javax.swing.JInternalFrame {
         cmdClean.setEnabled(true);
 
         camPet = new VideoCapture(SOURCE_CAM);
-
+//Delay para verifica se a cam abriu e habilitar o botão de tirar foto
+        try {
+            Thread.sleep(400);
+            if (!camPet.isOpened()) {
+                cmdTakePicture.setEnabled(false);
+                //btnSourceCam.setForeground(Color.green);
+                btnSourceCam.setBackground(Color.green);
+               // cmdStart.setEnabled(false);
+            } else {
+                cmdTakePicture.setEnabled(true);
+                //btnSourceCam.setForeground(Color.red);
+                btnSourceCam.setBackground(Color.red);
+                //cmdStart.setEnabled(true);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         //myThread = new DaemonThread();
         //Thread t = new Thread(myThread);
         myThreadCam1 = new DaemonThreadCam1();
@@ -378,17 +411,7 @@ public class TelaJavaCam extends javax.swing.JInternalFrame {
         //t.start();
         tCam1.start();
 
-        //Delay para verifica se a cam abriu e habilitar o botão de tirar foto
-        try {
-            Thread.sleep(400);
-            if (!camPet.isOpened()) {
-                cmdTakePicture.setEnabled(false);
-            } else {
-                cmdTakePicture.setEnabled(true);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        
 
         cmdSair.setEnabled(false); //sair button
         cmdStart.setEnabled(false);  //start button
@@ -484,16 +507,24 @@ public class TelaJavaCam extends javax.swing.JInternalFrame {
     private void btnSourceCamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSourceCamActionPerformed
         // TODO add your handling code here:
         boolean selected = btnSourceCam.isSelected();
-
+               
         if (selected) {
             SOURCE_CAM = 0;
             btnSourceCam.setText("Webcam 0");
+
+            cmdStart.setEnabled(true);
         } else {
             SOURCE_CAM = 1;
             btnSourceCam.setText("Webcam 1");
+            cmdStart.setEnabled(true);
         }
+        
 
     }//GEN-LAST:event_btnSourceCamActionPerformed
+
+    private void btnSourceCamMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSourceCamMouseClicked
+
+    }//GEN-LAST:event_btnSourceCamMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -504,6 +535,7 @@ public class TelaJavaCam extends javax.swing.JInternalFrame {
     private javax.swing.JButton cmdStop;
     private javax.swing.JButton cmdTakePicture;
     private javax.swing.JFileChooser jFileChooser;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel lblCam1;
