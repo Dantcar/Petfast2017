@@ -177,7 +177,7 @@ private static final int xOffset = 30, yOffset = 30; //teste
 
         btnImprimirRelatorioCliente.setBackground(new java.awt.Color(204, 204, 204));
         btnImprimirRelatorioCliente.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        btnImprimirRelatorioCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/infraero/pdf2.png"))); // NOI18N
+        btnImprimirRelatorioCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/pdf2.png"))); // NOI18N
         btnImprimirRelatorioCliente.setText("Imprimir em PDF");
         btnImprimirRelatorioCliente.setToolTipText("Salvar Alterações");
         btnImprimirRelatorioCliente.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);

@@ -12,6 +12,10 @@ import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.DirectoryNotEmptyException;
+import java.nio.file.Files;
+import java.nio.file.NoSuchFileException;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
@@ -38,6 +42,7 @@ public class TelaJavaCam extends javax.swing.JInternalFrame {
         cmdStop.setEnabled(false);
         cmdClean.setEnabled(false);
         cmdStart.setEnabled(false);
+        cmdDelPicture.setEnabled(false);
         btnSourceCam.setBackground(Color.green);
         btnSourceCam.setText("Escolha a Cam");
 
@@ -196,12 +201,14 @@ public class TelaJavaCam extends javax.swing.JInternalFrame {
         cmdSair = new javax.swing.JButton();
         lblFotoTake = new javax.swing.JLabel();
         cmdClean = new javax.swing.JButton();
+        cmdDelPicture = new javax.swing.JButton();
         lblCam1 = new javax.swing.JLabel();
         lblPetFotoCaminho = new javax.swing.JLabel();
         btnSourceCam = new javax.swing.JToggleButton();
-        jLabel1 = new javax.swing.JLabel();
+        lblStatusWebCam = new javax.swing.JLabel();
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 25), 2));
+        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 104, 0), 2));
+        jPanel1.setForeground(new java.awt.Color(0, 104, 0));
         jPanel1.setPreferredSize(new java.awt.Dimension(600, 400));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -221,7 +228,7 @@ public class TelaJavaCam extends javax.swing.JInternalFrame {
                 .addContainerGap())
         );
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+        jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(104, 0, 0), 2));
 
         cmdStart.setText("Start");
         cmdStart.addActionListener(new java.awt.event.ActionListener() {
@@ -252,11 +259,19 @@ public class TelaJavaCam extends javax.swing.JInternalFrame {
         });
 
         lblFotoTake.setBackground(new java.awt.Color(104, 104, 104));
+        lblFotoTake.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         cmdClean.setText("Clean");
         cmdClean.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmdCleanActionPerformed(evt);
+            }
+        });
+
+        cmdDelPicture.setText("Del Picture");
+        cmdDelPicture.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdDelPictureActionPerformed(evt);
             }
         });
 
@@ -270,9 +285,7 @@ public class TelaJavaCam extends javax.swing.JInternalFrame {
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGap(9, 9, 9)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                                    .addComponent(cmdStart)
-                                    .addComponent(cmdSair)))
+                                .addComponent(cmdStart))
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addContainerGap()
                                 .addComponent(cmdStop)))
@@ -284,12 +297,17 @@ public class TelaJavaCam extends javax.swing.JInternalFrame {
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(cmdTakePicture)
-                                    .addComponent(cmdClean, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(cmdClean, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(cmdDelPicture))
                                 .addGap(0, 0, Short.MAX_VALUE)))))
                 .addContainerGap())
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(cmdSair)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel2Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {cmdClean, cmdSair, cmdStart, cmdStop, cmdTakePicture});
+        jPanel2Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {cmdClean, cmdDelPicture, cmdSair, cmdStart, cmdStop, cmdTakePicture});
 
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -300,18 +318,20 @@ public class TelaJavaCam extends javax.swing.JInternalFrame {
                 .addComponent(cmdStop)
                 .addGap(18, 18, 18)
                 .addComponent(cmdClean, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 85, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(lblFotoTake, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(cmdTakePicture, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(33, 33, 33)
+                .addGap(18, 18, 18)
+                .addComponent(cmdDelPicture, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(cmdSair)
-                .addGap(19, 19, 19))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel2Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {cmdClean, cmdSair, cmdStart, cmdStop, cmdTakePicture});
 
-        lblCam1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        lblCam1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 104)));
 
         lblPetFotoCaminho.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
 
@@ -326,8 +346,6 @@ public class TelaJavaCam extends javax.swing.JInternalFrame {
                 btnSourceCamActionPerformed(evt);
             }
         });
-
-        jLabel1.setText("jLabel1");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -346,27 +364,25 @@ public class TelaJavaCam extends javax.swing.JInternalFrame {
                         .addComponent(lblCam1, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(70, 70, 70)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnSourceCam, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(50, 50, 50)
-                                .addComponent(jLabel1)))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnSourceCam, javax.swing.GroupLayout.DEFAULT_SIZE, 147, Short.MAX_VALUE)
+                            .addComponent(lblStatusWebCam, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(lblCam1, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(btnSourceCam)
                         .addGap(18, 18, 18)
-                        .addComponent(jLabel1))
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 423, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblStatusWebCam, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 423, Short.MAX_VALUE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(41, 41, 41)
                 .addComponent(lblPetFotoCaminho, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -387,7 +403,7 @@ public class TelaJavaCam extends javax.swing.JInternalFrame {
                 cmdTakePicture.setEnabled(false);
                 //btnSourceCam.setForeground(Color.green);
                 btnSourceCam.setBackground(Color.green);
-               // cmdStart.setEnabled(false);
+                // cmdStart.setEnabled(false);
             } else {
                 cmdTakePicture.setEnabled(true);
                 //btnSourceCam.setForeground(Color.red);
@@ -411,8 +427,6 @@ public class TelaJavaCam extends javax.swing.JInternalFrame {
         //t.start();
         tCam1.start();
 
-        
-
         cmdSair.setEnabled(false); //sair button
         cmdStart.setEnabled(false);  //start button
         cmdStop.setEnabled(true);  // stop button
@@ -433,6 +447,8 @@ public class TelaJavaCam extends javax.swing.JInternalFrame {
         camPet.release();
         cmdSair.setEnabled(true); //sair button
         cmdTakePicture.setEnabled(false);
+        cmdDelPicture.setEnabled(true);
+        cmdDelPicture.setEnabled(false);
         btnSourceCam.setEnabled(true); //botão cam
 
         lblFoto.setIcon(null);
@@ -454,6 +470,7 @@ public class TelaJavaCam extends javax.swing.JInternalFrame {
         ////////////////snapshot button
 //      
         cmdClean.setEnabled(true);
+        cmdDelPicture.setEnabled(true);
         jFileChooser.addChoosableFileFilter(new TextFilter());
 
         int returnVal = jFileChooser.showSaveDialog(this);
@@ -501,13 +518,14 @@ public class TelaJavaCam extends javax.swing.JInternalFrame {
         lblPetFotoCaminho.setText("");
         this.repaint();
         cmdClean.setEnabled(false);
+        cmdDelPicture.setEnabled(false);
 
     }//GEN-LAST:event_cmdCleanActionPerformed
 
     private void btnSourceCamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSourceCamActionPerformed
         // TODO add your handling code here:
         boolean selected = btnSourceCam.isSelected();
-               
+
         if (selected) {
             SOURCE_CAM = 0;
             btnSourceCam.setText("Webcam 0");
@@ -518,7 +536,7 @@ public class TelaJavaCam extends javax.swing.JInternalFrame {
             btnSourceCam.setText("Webcam 1");
             cmdStart.setEnabled(true);
         }
-        
+
 
     }//GEN-LAST:event_btnSourceCamActionPerformed
 
@@ -526,21 +544,37 @@ public class TelaJavaCam extends javax.swing.JInternalFrame {
 
     }//GEN-LAST:event_btnSourceCamMouseClicked
 
+    private void cmdDelPictureActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdDelPictureActionPerformed
+        // TODO add your handling code here:
+        File path = new File(lblPetFotoCaminho.getText());
+        if (path.delete()) {
+            System.out.println("deletado");
+            lblFoto.setIcon(null);
+            lblFotoTake.setIcon(null);
+            lblPetFotoCaminho.setText("");
+            this.repaint();
+        } else {
+            System.out.println("deletado");
+        }
+
+    }//GEN-LAST:event_cmdDelPictureActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToggleButton btnSourceCam;
     private javax.swing.JButton cmdClean;
+    private javax.swing.JButton cmdDelPicture;
     private javax.swing.JButton cmdSair;
     private javax.swing.JButton cmdStart;
     private javax.swing.JButton cmdStop;
     private javax.swing.JButton cmdTakePicture;
     private javax.swing.JFileChooser jFileChooser;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel lblCam1;
     private javax.swing.JLabel lblFoto;
     private javax.swing.JLabel lblFotoTake;
     private javax.swing.JLabel lblPetFotoCaminho;
+    private javax.swing.JLabel lblStatusWebCam;
     // End of variables declaration//GEN-END:variables
 }

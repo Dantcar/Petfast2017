@@ -196,7 +196,7 @@ public class TelaRelatorioPet extends javax.swing.JInternalFrame {
 
         btnImprimirRelatorioPet.setBackground(new java.awt.Color(204, 204, 204));
         btnImprimirRelatorioPet.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        btnImprimirRelatorioPet.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/infraero/pdf2.png"))); // NOI18N
+        btnImprimirRelatorioPet.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/pdf2.png"))); // NOI18N
         btnImprimirRelatorioPet.setText("Imprimir em PDF");
         btnImprimirRelatorioPet.setToolTipText("Salvar Alterações");
         btnImprimirRelatorioPet.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
