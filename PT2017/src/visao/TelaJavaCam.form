@@ -75,7 +75,7 @@
       <Properties>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
-            <LineBorder thickness="2">
+            <LineBorder thickness="5">
               <Color PropertyName="color" blue="0" green="68" red="0" type="rgb"/>
             </LineBorder>
           </Border>
@@ -102,7 +102,7 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="lblFoto" pref="397" max="32767" attributes="0"/>
+                  <Component id="lblFoto" pref="391" max="32767" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -117,7 +117,7 @@
       <Properties>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
-            <LineBorder thickness="2">
+            <LineBorder thickness="5">
               <Color PropertyName="color" blue="0" green="0" red="68" type="rgb"/>
             </LineBorder>
           </Border>
@@ -255,7 +255,7 @@
       <Properties>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
-            <LineBorder>
+            <LineBorder thickness="5">
               <Color PropertyName="color" blue="68" green="0" red="0" type="rgb"/>
             </LineBorder>
           </Border>
@@ -271,6 +271,9 @@
     </Component>
     <Component class="javax.swing.JToggleButton" name="btnSourceCam">
       <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="0" green="68" red="68" type="rgb"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Source"/>
       </Properties>
       <Events>

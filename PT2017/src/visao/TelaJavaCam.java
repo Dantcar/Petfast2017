@@ -207,7 +207,7 @@ public class TelaJavaCam extends javax.swing.JInternalFrame {
         btnSourceCam = new javax.swing.JToggleButton();
         lblStatusWebCam = new javax.swing.JLabel();
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 104, 0), 2));
+        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 104, 0), 5));
         jPanel1.setForeground(new java.awt.Color(0, 104, 0));
         jPanel1.setPreferredSize(new java.awt.Dimension(600, 400));
 
@@ -224,11 +224,11 @@ public class TelaJavaCam extends javax.swing.JInternalFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(lblFoto, javax.swing.GroupLayout.DEFAULT_SIZE, 397, Short.MAX_VALUE)
+                .addComponent(lblFoto, javax.swing.GroupLayout.DEFAULT_SIZE, 391, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(104, 0, 0), 2));
+        jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(104, 0, 0), 5));
 
         cmdStart.setText("Start");
         cmdStart.addActionListener(new java.awt.event.ActionListener() {
@@ -331,10 +331,11 @@ public class TelaJavaCam extends javax.swing.JInternalFrame {
 
         jPanel2Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {cmdClean, cmdSair, cmdStart, cmdStop, cmdTakePicture});
 
-        lblCam1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 104)));
+        lblCam1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 104), 5));
 
         lblPetFotoCaminho.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
 
+        btnSourceCam.setBackground(new java.awt.Color(104, 104, 0));
         btnSourceCam.setText("Source");
         btnSourceCam.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -398,7 +399,7 @@ public class TelaJavaCam extends javax.swing.JInternalFrame {
         camPet = new VideoCapture(SOURCE_CAM);
 //Delay para verifica se a cam abriu e habilitar o botão de tirar foto
         try {
-            Thread.sleep(400);
+            Thread.sleep(500);
             if (!camPet.isOpened()) {
                 cmdTakePicture.setEnabled(false);
                 //btnSourceCam.setForeground(Color.green);
@@ -552,11 +553,11 @@ public class TelaJavaCam extends javax.swing.JInternalFrame {
             lblFoto.setIcon(null);
             lblFotoTake.setIcon(null);
             lblPetFotoCaminho.setText("");
-            this.repaint();
-        } else {
-            System.out.println("deletado");
-        }
 
+        } else {
+            System.out.println("Erro ao Deletar arquivo");
+        }
+        this.repaint();
     }//GEN-LAST:event_cmdDelPictureActionPerformed
 
 
